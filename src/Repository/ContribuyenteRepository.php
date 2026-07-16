@@ -28,9 +28,10 @@ final class ContribuyenteRepository
         }
 
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM contr WHERE nombr LIKE :q OR apell LIKE :q OR cuent LIKE :q OR ndocu LIKE :q ORDER BY nombr'
+            'SELECT * FROM contr WHERE nombr LIKE :q1 OR apell LIKE :q2 OR cuent LIKE :q3 OR ndocu LIKE :q4 ORDER BY nombr'
         );
-        $stmt->execute(['q' => '%' . $filtro . '%']);
+        $like = '%' . $filtro . '%';
+        $stmt->execute(['q1' => $like, 'q2' => $like, 'q3' => $like, 'q4' => $like]);
 
         return $stmt->fetchAll();
     }

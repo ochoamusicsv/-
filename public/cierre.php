@@ -12,7 +12,11 @@ $reporte = new ReporteRepository(pdo());
 
 if (is_post()) {
     try {
-        $res = $cierreSvc->cerrarDia(new DateTimeImmutable((string) $_POST['fecha']), (string) ($_POST['usuario'] ?? 'sistema'));
+        $fechaPost = (string) ($_POST['fecha'] ?? '');
+        if ($fechaPost === '') {
+            throw new RuntimeException('Debe indicar la fecha del cierre.');
+        }
+        $res = $cierreSvc->cerrarDia(new DateTimeImmutable($fechaPost), (string) ($_POST['usuario'] ?? 'sistema'));
         flash('success', sprintf(
             'Cierre %s: %d recibos, monto $%s, multa $%s, interés $%s, total $%s.',
             $res['fecha'], $res['recibos'], money($res['total_monto']),
