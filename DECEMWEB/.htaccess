@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Redirigir todas las peticiones hacia la carpeta public/,
+# donde se encuentra el front controller.
+RewriteRule ^public/ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]
+
+# Bloquear el acceso directo a archivos sensibles.
+<FilesMatch "\.(env|sql|md)$">
+    Require all denied
+</FilesMatch>
