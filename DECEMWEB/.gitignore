@@ -1,0 +1,20 @@
+# Configuración local
+.env
+
+# Dependencias
+/vendor/
+
+# Archivos generados
+/storage/*
+!/storage/.gitkeep
+/uploads/*
+!/uploads/.gitkeep
+/reports/*
+!/reports/.gitkeep
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

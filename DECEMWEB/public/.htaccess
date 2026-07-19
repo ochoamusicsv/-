@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Servir archivos y directorios existentes tal cual (assets, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# El resto de peticiones pasan al front controller.
+RewriteRule ^ index.php [L]
+
+# Cabeceras de seguridad básicas.
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
